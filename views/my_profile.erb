@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>log</title>
+  <link rel="stylesheet" href="../../main.css">
+    <script>
+    window.onload = function () {
+      var p = document.getElementsByClassName("icon")
+      console.log(p)
+      p[0].style.backgroundColor = '<%= @user_color %>';
+
+      var likeBtn = document.querySelectorAll(".like_botton")
+      console.log(likeBtn)
+
+    }
+  </script>
+</head>
+<body>
+  <div class="my_profile">
+    <div class="icon my_profile_icon">
+    </div>
+    <h1><%= @user_profile.name%></h1>
+    <h2><%= @user_profile.simple_word%></h2>
+
+    <div class="questions_count">
+      <h1><%= @user_profile.questions.count%></h1>
+      <h3>投稿した数</h3>
+    </div>
+    <div class="likes_count">
+      <h1><%=@user_likes%></h1>
+      <h3>いいねした投稿</h3>
+    </div>
+
+    <a href="/user/<%= @user_profile.id %>/edit">
+      <div class="edit_my_profile">
+        プロフィールを変更する
+      </div>
+    </a>
+    <a href="/logout">ログアウトする</a>
+  </div>
+</body>
+</body>
+</html>

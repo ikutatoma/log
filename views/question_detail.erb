@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="/marked.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/highlight.min.js"></script>
+  <link rel="stylesheet" href="/jquery-linedtextarea.css">
+  <link rel="stylesheet" href="../../main.css?v=2">
+  <script src="/jQuery.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <title>log</title>
+</head>
+<body>
+  <div class="qu_de_main">
+    <h1 class="title_detail"><%= @QuesDetail.title %></h1>
+    <p id="content"></p>
+    <div id="all_answer">
+      <h2>コメント欄</h2>
+      <form action="/question/<%= @QuesDetail.id %>/detail/answer" method="post">
+        <div class="title_head">
+          <input type="text" class="title_inp" name="title" placeholder="title"><br>
+          <textarea name="content" cols="30" rows="3" placeholder="content"></textarea><br>
+          <input type="submit" class="de_sub" value="返信する">
+        </div>
+      </form>
+      <% @all_answer.each do |answer|%>
+      <div class="indi_answer">
+        <p class="answer_user"><%= answer.user.name%></p>
+        <h1 class="title_answer"><%= answer.title %></h1>
+        <p class="title_answer"><%= answer.content %></p>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <script>
+    $(function () {
+      $("#all_answer").resizable({
+        minheight: 60,
+        maxHeight: 600,
+        // maxWidth: 1110,
+        handles: "n,s",
+      })
+    });
+
+    var html = marked("<%= @escaped_hoge %>")
+    document.querySelector("#content").innerHTML = html
+  </script>
+</body>
+</html>

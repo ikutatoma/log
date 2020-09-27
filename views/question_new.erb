@@ -1,0 +1,55 @@
+ <!DOCTYPE html>
+ <html lang="ja">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>log</title>
+   <link rel="stylesheet" href="../main.css">
+   <script src="../marked.min.js"></script>
+   <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/highlight.min.js"></script>
+   <link rel="stylesheet" href="../jquery-linedtextarea.css">
+   <script src="../jQuery.js"></script>
+   <%# <script type="text/javascript" src="../jquery-linedtextarea.js"></script> %>
+ </head>
+ <body>
+   <div class="qu_new_main">
+     <div class="qu_new_head">
+       <h2>新しく投稿する/markdown記法可能</h2>
+     </div>
+     <form action="/questions" method="post">
+       <div class="qu_new_title_head">
+         <input type="text" class="title" name="title" placeholder="タイトル">
+       </div>
+
+       <select name="course" class="sele_course">
+         <% Course.all.each do | course | %>
+         <option value="<%= course.id %>"><%= course.name %></option>
+         <% end %>
+       </select>
+
+       <div id="content">
+         <textarea name="content" id="textarea" cols="30" rows="10"></textarea>
+       </div>
+
+       <div class="qu_new_preview" id="headline"></div>
+
+       <input class="qu_new_post" type="submit" value="投稿する">
+     </form>
+   </div>
+   <script>
+     var markedText = document.getElementById("textarea")
+     markedText.onkeydown = function () {
+       var html = marked(markedText.value)
+       document.querySelector("#headline").innerHTML = html
+     };
+
+     //  $(function () {
+     //    $(".content").linedtextarea({
+     //      selectedLine: 5
+     //    });
+     //  });
+   </script>
+
+ </body>
+ </html>

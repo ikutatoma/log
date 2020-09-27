@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>log</title>
+  <link rel="stylesheet" href="../../main.css">
+   <script>
+    window.onload = function () {
+      var p = document.getElementsByClassName("icon")
+      console.log(p)
+      p[0].style.backgroundColor = '<%= @user_color %>';
+    }
+  </script>
+</head>
+<body>
+  <div clsss="left">
+    <ul>
+      <a href="/">
+        <li class="main_list">ホーム</li>
+      </a>
+      <li class="main_list">通知</li>
+      <li class="main_list prof">
+        <a href="/user/<%= current_user.id%>/detail">
+          <div class="icon">
+          </div>
+        </a>
+        <div class="p">
+          <br>
+          <%= current_user.name%>
+          <br><br>
+          <%= current_user.simple_word%><br><br>
+        </div>
+      </li>
+      <li class="main_list"><a href="/questions/new">投稿する</a></li>
+    </ul>
+  </div>
+
+  <div class="middle">
+    <% @sarch_ques.each do | question |%>
+    <div class="all_question">
+      <div class="user_icon"></div>
+      <li><%= question.user.name %>さんの質問</p>
+      </li>
+
+      <a href="/question/<%= question.id %>/detail">
+        <p class="in_tit"><%= question.title %></p>
+      </a>
+        <form action="/like/<%= question.id%>" method="post">
+        <input class="like_botton" type="submit"  value="">
+      </form>
+    </div>
+    <% end %>
+  </div>
+
+  <div class="right">
+    <form action="/quesiton/sarch" method="get">
+      <input class="sarch" name="sarch" type="text" placeholder="キーワード検索">
+      <input class="sar_sub" type="submit" value= "検索">
+    </form>
+    <ul class="cour">
+      <p>コースカテゴリ</p>
+      <% @courses.each do |course|%>
+      <li><a href="/questions/<%= course.id%>/course"><%= course.name%></a></li>
+      <% end %>
+    </ul>
+  </div>
+</body>
+</html>

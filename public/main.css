@@ -311,6 +311,12 @@ pre {
   text-align: center;
 }
 
+.path_a {
+  position: absolute;
+  top: 90%;
+  left: 55%;
+}
+
 /* question_detail */
 #content {
   margin-left: 100px;
